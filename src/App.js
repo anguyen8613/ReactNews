@@ -2,54 +2,27 @@ import { useState, useEffect } from 'react';
 
 function App() {
 
-    const [count, setCount] = useState(0);
-
-    const increment = () => {
-        setCount(count + 1);
-    }
+    const [news, setNews] = useState([]);
 
     useEffect(() => {
-        document.title = `Counted ${count} times`;
+        fetchNews();
     })
 
-
+    const fetchNews = () => {
+        fetch('http://hn.algolia.com/api/v1/search?query=next.js')
+            .then(result => result.json())
+            .then(data => setNews(data.hits))
+            .catch(error => console.log(error))
+    }
     return (
         <div>
-            <h2>Next.js</h2>
-            <button onClick={increment}>{count}</button>
+            <h2>Next.js News </h2>
+            {news.map((n, i) => (
+                <p key={i}> {n.title} </p>
+            ))}
         </div>
     )
 }
 
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
