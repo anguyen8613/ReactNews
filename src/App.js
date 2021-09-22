@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
 
@@ -8,16 +8,21 @@ function App() {
         setCount(count + 1);
     }
 
+    useEffect(() => {
+        document.title = `Counted ${count} times`;
+    })
+
+
     return (
         <div>
             <h2>Next.js</h2>
-            <button onClick={increment}> {count} </button>
+            <button onClick={increment}>{count}</button>
         </div>
     )
 }
 
-export default App;
 
+export default App;
 
 
 
