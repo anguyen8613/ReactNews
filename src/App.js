@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 function App() {
 
     const [news, setNews] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('next.js');
-    const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=next.js');
+    const [searchQuery, setSearchQuery] = useState('React');
+    const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=React');
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ function App() {
     )
 
     const showForm = () => (
-        <form onSubmit={handleSubmit}>
+        <form style={{padding: '10px'}} onSubmit={handleSubmit}>
             <input type='text' value={searchQuery} onChange={handleChange} />
             <button>Search</button>
         </form>
@@ -41,13 +41,14 @@ function App() {
 
     const showNews = () => (
         news.map((n, i) => (
-                <p key={i}> {n.title} </p>
+            <p style={{ padding: '10px' }} key={i}><a href={n.url} target='window'>{n.title}</a></p>
+
         ))
     )
     
     return (
         <div>
-            <h2>Next.js News </h2>
+            <h2 style={{textAlign: 'center', padding:'10px'}}> Applied Science News Board</h2>
             {showLoading()}
             {showForm()}
             {showNews()}
